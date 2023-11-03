@@ -25,7 +25,11 @@ public class UsuarioRepository : IUsuarioRepository
     {
         var queryString = @"UPDATE Usuario SET nombre_de_usuario = {@nombre};";
 
-        
+        using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+        {
+            connection.Open();
+            
+        }
     }
     public List<Usuario> GetAll()
     {
