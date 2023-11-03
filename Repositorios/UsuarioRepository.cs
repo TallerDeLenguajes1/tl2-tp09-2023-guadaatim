@@ -1,5 +1,6 @@
 using Kanban.Models;
 using System.Data.SQLite;
+using System.Diagnostics;
 namespace Kanban.Repository
 
 public class UsuarioRepository : IUsuarioRepository
@@ -7,7 +8,7 @@ public class UsuarioRepository : IUsuarioRepository
     private string cadenaConexion = "Data Source:DB/tareas.db:Cache=Shared";
     public void CrearUsuario(Usuario usuarioNuevo)
     {
-        var queryString = "INSERT INTO Usuario (nombre_de_usuario) VALUES(@nombre);";
+        var queryString = @"INSERT INTO Usuario (nombre_de_usuario) VALUES(@nombre);";
 
         using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
         {
@@ -22,6 +23,8 @@ public class UsuarioRepository : IUsuarioRepository
     }
     public void ModificarUsuario(int idUsuario, Usuario usuarioModificar)
     {
+        var queryString = @"UPDATE Usuario SET nombre_de_usuario = {@nombre};";
+
         
     }
     public List<Usuario> GetAll()
@@ -55,5 +58,6 @@ public class UsuarioRepository : IUsuarioRepository
     {
 
     }
-    
+
 }
+
