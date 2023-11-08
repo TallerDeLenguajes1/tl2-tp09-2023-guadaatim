@@ -4,10 +4,10 @@ namespace Kanban.Repository;
 
 public interface IUsuarioRepository
 { 
-    public void CrearUsuario(Usuario usuarioNuevo);
-    public void ModificarUsuario(int idUsuario, Usuario usuarioModificar);
+    public void CreateUsuario(Usuario usuarioNuevo);
+    public void UpdateUsuario(int idUsuario, Usuario usuarioModificar);
     public List<Usuario> GetAll();
-    public Usuario GetUsuario(int idUsuario);
+    public Usuario GetUsuarioById(int idUsuario);
     public void EliminarUsuario(int idUsuario);
 }
     

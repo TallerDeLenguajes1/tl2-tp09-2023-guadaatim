@@ -1,12 +1,12 @@
 using Kanban.Models;
 using System.Data.SQLite;
 using System.Diagnostics;
-namespace Kanban.Repository
+namespace Kanban.Repository;
 
 public class UsuarioRepository : IUsuarioRepository
 {
     private string cadenaConexion = "Data Source:DB/tareas.db:Cache=Shared";
-    public void CrearUsuario(Usuario usuarioNuevo)
+    public void CreateUsuario(Usuario usuarioNuevo)
     {
         var queryString = @"INSERT INTO Usuario (nombre_de_usuario) VALUES(@nombre);";
 
@@ -21,20 +21,29 @@ public class UsuarioRepository : IUsuarioRepository
             connection.Close();
         }
     }
-    public void ModificarUsuario(int idUsuario, Usuario usuarioModificar)
+    public void UpdateUsuario(int idUsuario, Usuario usuarioModificar)
     {
-        var queryString = @"UPDATE Usuario SET nombre_de_usuario = {@nombre};";
+        var queryString = @"UPDATE Usuario SET nombre_de_usuario = (@nombre) WHERE id = (@idUsuario);";
 
         using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
         {
             connection.Open();
-            
+
+            var command = new SQLiteCommand(queryString, connection);
+
+            command.Parameters.Add(new SQLiteParameter("@nombre", usuarioModificar.NombreDeUsuario));
+            command.Parameters.Add(new SQLiteParameter("@id", idUsuario));
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
         }
     }
     public List<Usuario> GetAll()
     {
         var queryString = @"SELECT * FROM Usuario;";
         List<Usuario> usuarios = new List<Usuario>();
+        
         using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
         {
             SQLiteCommand command = new SQLiteCommand(queryString, connection);
@@ -54,14 +63,42 @@ public class UsuarioRepository : IUsuarioRepository
         }
         return usuarios;
     }
-    public Usuario GetUsuario(int idUsuario)
+    public Usuario GetUsuarioById(int idUsuario)
     {
-        return null;
+        var queryString = @"SELECT * FROM Usuario WHERE id = @idUsuario;";
+        Usuario usuario = new Usuario();
+
+        using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+        {
+            SQLiteCommand command = new SQLiteCommand(queryString, connection);
+            command.Parameters.Add(new SQLiteParameter("@idUsuario", idUsuario));
+            connection.Open();
+
+            using (SQLiteDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    usuario.Id = Convert.ToInt32(reader["id"]);
+                    usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
+                }
+            }
+            
+        connection.Close();
+        }
+        return usuario;
     }
     public void EliminarUsuario(int idUsuario)
     {
+        var queryString = @"DELETE * FROM Usuario WHERE id = @idUsuario;";
 
+        using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+        {
+            SQLiteCommand command = new SQLiteCommand(queryString, connection);
+            command.Parameters.Add(new SQLiteParameter("@idUsuario", idUsuario));
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
     }
-
 }
-
