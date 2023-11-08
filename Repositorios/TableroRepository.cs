@@ -6,6 +6,7 @@ namespace Kanban.Repository;
 public class TableroRepository : ITableroRepository
 {
     private string cadenaConexion = "Data Source:DB/tareas.db:Cache=Shared";
+    
     public void CreateTablero(Tablero tablero)
     {
         var queryString = @"INSERT INTO Tablero () VALUES ();";
@@ -20,6 +21,7 @@ public class TableroRepository : ITableroRepository
             connection.Close();
         }
     }
+    
     public List<Tablero> GetAllTablero()
     {
         var queryString = @"SELECT * FROM Tablero;";
@@ -46,6 +48,7 @@ public class TableroRepository : ITableroRepository
         }
         return tableros;
     }
+    
     public List<Tablero> GetTableroByUsuario(int idUsuario)
     {
         var queryString = @"SELECT * FROM Tablero WHERE id_usuario_propietario = @idUsuario;";
@@ -72,6 +75,7 @@ public class TableroRepository : ITableroRepository
         }
         return tableros;
     }
+    
     public void UpdateTablero(int idTablero, Tablero tableroModificar)
     {
         var queryString = @"UPDATE Tablero SET WHERE id = @idUsuario;";
@@ -92,6 +96,7 @@ public class TableroRepository : ITableroRepository
             connection.Close();
         }
     }
+    
     public void DeleteTablero(int idTablero)
     {
         var queryString = @"DELETE * FROM Tablero WHERE id = @idTablero;";
