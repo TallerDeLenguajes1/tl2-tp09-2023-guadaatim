@@ -14,7 +14,7 @@ public class UsuarioRepository : IUsuarioRepository
         {
             connection.Open();
 
-            var command = new SQLiteCommand(queryString, connection);
+            SQLiteCommand command = new SQLiteCommand(queryString, connection);
             command.Parameters.Add(new SQLiteParameter("@nombre", usuarioNuevo.NombreDeUsuario));
             command.ExecuteNonQuery();
 
@@ -29,7 +29,7 @@ public class UsuarioRepository : IUsuarioRepository
         {
             connection.Open();
 
-            var command = new SQLiteCommand(queryString, connection);
+            SQLiteCommand command = new SQLiteCommand(queryString, connection);
 
             command.Parameters.Add(new SQLiteParameter("@nombre", usuarioModificar.NombreDeUsuario));
             command.Parameters.Add(new SQLiteParameter("@id", idUsuario));
@@ -39,7 +39,7 @@ public class UsuarioRepository : IUsuarioRepository
             connection.Close();
         }
     }
-    public List<Usuario> GetAll()
+    public List<Usuario> GetAllUsuario()
     {
         var queryString = @"SELECT * FROM Usuario;";
         List<Usuario> usuarios = new List<Usuario>();
@@ -93,6 +93,8 @@ public class UsuarioRepository : IUsuarioRepository
 
         using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
         {
+            connection.Open();
+            
             SQLiteCommand command = new SQLiteCommand(queryString, connection);
             command.Parameters.Add(new SQLiteParameter("@idUsuario", idUsuario));
 
