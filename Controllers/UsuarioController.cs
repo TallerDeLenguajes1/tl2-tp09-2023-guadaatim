@@ -53,7 +53,7 @@ public class UsuarioController : ControllerBase
     [HttpPut]
     public ActionResult<Usuario> UpdateNombreUsuario(int idUsuario, string nombre)
     {
-
+        //completar
     }
 */  
 }
