@@ -1,9 +1,8 @@
 using Kanban.Models;
 using System.Data.SQLite;
-using System.Diagnostics;
 namespace Kanban.Repository;
 
-public class TareaRpository : ITareaRepository
+public class TareaRepository : ITareaRepository
 {
     private string cadenaConexion = "Data Source:DB/tareas.db:Cache=Shared";
 
