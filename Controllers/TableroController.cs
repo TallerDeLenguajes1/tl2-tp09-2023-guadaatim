@@ -19,14 +19,14 @@ public class TableroController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult CreateTablero(Tablero tableroNuevo)
+    public ActionResult<Tablero> CreateTablero(Tablero tableroNuevo)
     {
         tableroRepository.CreateTablero(tableroNuevo);
         return Ok(tableroNuevo);
     }
 
     [HttpGet]
-    public ActionResult GetAllTableros()
+    public ActionResult<List<Tablero>> GetAllTableros()
     {
         List<Tablero> tableros = tableroRepository.GetAllTablero();
         
