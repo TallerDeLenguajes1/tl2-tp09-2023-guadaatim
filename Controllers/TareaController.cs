@@ -31,26 +31,38 @@ public class TareaController : ControllerBase
         tareaRepository.UpdateTarea(idTarea, tareaModificada);
         return Ok(tareaModificada);
     }
-/*
+
     [HttpPut]
     public ActionResult UpdateEstadoTarea(int idTarea, EstadoTarea estado)
     {
-        //completar
+        Tarea tarea = tareaRepository.GetTareaById(idTarea);
+        tarea.Estado = estado;
+
+        tareaRepository.UpdateTarea(idTarea, tarea);
+        return Ok();
     }
-*/
+
     [HttpDelete]
     public ActionResult<Tarea> DeleteTarea(int idTarea)
     {
         tareaRepository.DeleteTarea(idTarea);
         return Ok();
     }
-/*
+
     [HttpGet]
     public ActionResult<List<Tarea>> CantidadTareasPorEstado(EstadoTarea estado)
     {
-        //completar
+        List<Tarea> tareas = tareaRepository.GetAllTareas().FindAll(t => t.Estado == estado);
+
+        if(tareas != null)
+        {
+            return Ok(tareas);
+        } else
+        {
+            return NotFound();
+        }
     }
-*/
+
     [HttpGet]
     public ActionResult<List<Tarea>> GetTareasByUsuario(int idUsuario)
     {
@@ -68,7 +80,7 @@ public class TareaController : ControllerBase
     [HttpGet]
     public ActionResult<List<Tarea>> GetTareasByTablero(int idTablero)
     {
-        List<Tarea> tareas = tareaRepository.GetAllTareaByTablero(idTablero);
+        List<Tarea> tareas = tareaRepository.GetAllTareasByTablero(idTablero);
         
         if(tareas != null)
         {

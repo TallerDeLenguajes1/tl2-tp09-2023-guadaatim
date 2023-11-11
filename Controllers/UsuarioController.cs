@@ -49,11 +49,14 @@ public class UsuarioController : ControllerBase
             return NotFound();
         }
     }
-/*
+
     [HttpPut]
     public ActionResult<Usuario> UpdateNombreUsuario(int idUsuario, string nombre)
     {
-        //completar
-    }
-*/  
+        Usuario usuario = usuarioRepository.GetUsuarioById(idUsuario);
+        usuario.NombreDeUsuario = nombre;
+
+        usuarioRepository.UpdateUsuario(idUsuario, usuario);
+        return Ok(usuario);
+    }  
 }

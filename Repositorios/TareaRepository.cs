@@ -44,8 +44,37 @@ public class TareaRepository : ITareaRepository
             connection.Close();
         }
     }
+    public List<Tarea> GetAllTareas()
+    {
+        var queryString = @"SELECT * FROM Tarea;";
+        List<Tarea> tareas = new List<Tarea>();
 
-    public List<Tarea> GetAllTareaByTablero(int idTablero)
+        using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+        {
+            SQLiteCommand command = new SQLiteCommand(queryString, connection);
+            connection.Open();
+
+            using (SQLiteDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Tarea tarea = new Tarea();
+                    tarea.Id = Convert.ToInt32(reader["id"]);
+                    tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
+                    tarea.Nombre = reader["nombre"].ToString();
+                    tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
+                    tarea.Descripcion = reader["descripcion"].ToString();
+                    tarea.Color = reader["color"].ToString();
+                    tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_propietario"]);
+                    tareas.Add(tarea);
+                }
+            }
+            connection.Close();
+        }
+        return tareas;
+    }
+
+    public List<Tarea> GetAllTareasByTablero(int idTablero)
     {
         var queryString = @"SELECT * FROM Tarea WHERE id_tablero = @idTablero;";
         List<Tarea> tareas = new List<Tarea>();
