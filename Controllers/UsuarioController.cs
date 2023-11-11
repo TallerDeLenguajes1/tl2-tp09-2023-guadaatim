@@ -15,14 +15,14 @@ public class UsuarioController : ControllerBase
         usuarioRepository = new UsuarioRepository();
     }
 
-    [HttpPost]
+    [HttpPost("CrearUsuario")]
     public ActionResult<Usuario> CreateUsuario(Usuario usuarioNuevo)
     {
         usuarioRepository.CreateUsuario(usuarioNuevo);
         return Ok(usuarioNuevo);
     }
 
-    [HttpGet]
+    [HttpGet("GetAllUsuarios")]
     public ActionResult<List<Usuario>> GetAllUsuarios()
     {
         List<Usuario> usuarios = usuarioRepository.GetAllUsuario();
@@ -36,7 +36,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet]
+    [HttpGet("GetUsuarioById")]
     public ActionResult<Usuario> GetUsuarioById(int idUsuario)
     {
         Usuario usuario = usuarioRepository.GetUsuarioById(idUsuario);
@@ -50,7 +50,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpPut]
+    [HttpPut("ModificarUsuario")]
     public ActionResult<Usuario> UpdateNombreUsuario(int idUsuario, string nombre)
     {
         Usuario usuario = usuarioRepository.GetUsuarioById(idUsuario);
