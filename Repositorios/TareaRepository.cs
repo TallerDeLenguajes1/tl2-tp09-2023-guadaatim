@@ -38,7 +38,7 @@ public class TareaRepository : ITareaRepository
             connection.Open();
 
             command.Parameters.Add(new SQLiteParameter("@idUsuario", idUsuario));
-            command.Parameters.Add(new SQLiteParameter("@idTablero", idTarea));
+            command.Parameters.Add(new SQLiteParameter("@idTarea", idTarea));
 
             command.ExecuteNonQuery();
             connection.Close();
@@ -176,6 +176,7 @@ public class TareaRepository : ITareaRepository
             command.Parameters.Add(new SQLiteParameter("@estado", tareaModificar.Estado));
             command.Parameters.Add(new SQLiteParameter("@descripcion", tareaModificar.Descripcion));
             command.Parameters.Add(new SQLiteParameter("@color", tareaModificar.Color));
+            command.Parameters.Add(new SQLiteParameter("@idTarea", idTarea));
 
             command.ExecuteNonQuery();
             connection.Close();
