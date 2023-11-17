@@ -4,7 +4,7 @@ namespace Kanban.Repository;
 
 public class TareaRepository : ITareaRepository
 {
-    private string cadenaConexion = "Data Source=DB/kanban.db:Cache=Shared";
+    private string cadenaConexion = "Data Source=DB/kanban.db;Cache=Shared";
 
     public void CreateTarea(int idTablero, Tarea tarea) //devuelve tablero ???
     {
