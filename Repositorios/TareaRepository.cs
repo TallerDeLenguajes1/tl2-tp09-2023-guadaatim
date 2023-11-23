@@ -185,7 +185,7 @@ public class TareaRepository : ITareaRepository
     
     public void DeleteTarea(int idTarea)
     {
-        var queryString = @"DELETE * FROM Tarea WHERE id = @idTarea;";
+        var queryString = @"DELETE FROM Tarea WHERE id = @idTarea;";
 
         using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
         {

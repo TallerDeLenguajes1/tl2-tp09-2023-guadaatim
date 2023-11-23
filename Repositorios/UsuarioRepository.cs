@@ -88,7 +88,7 @@ public class UsuarioRepository : IUsuarioRepository
     }
     public void EliminarUsuario(int idUsuario)
     {
-        var queryString = @"DELETE * FROM Usuario WHERE id = @idUsuario;";
+        var queryString = @"DELETE FROM Usuario WHERE id = @idUsuario;";
 
         using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
         {
