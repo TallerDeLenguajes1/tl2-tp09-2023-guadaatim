@@ -29,7 +29,7 @@ public class UsuarioRepository : IUsuarioRepository
             SQLiteCommand command = new SQLiteCommand(queryString, connection);
             connection.Open();
 
-            command.Parameters.Add(new SQLiteParameter("@id", idUsuario));
+            command.Parameters.Add(new SQLiteParameter("@idUsuario", idUsuario));
             command.Parameters.Add(new SQLiteParameter("@nombre", usuarioModificar.NombreDeUsuario));
 
             command.ExecuteNonQuery();

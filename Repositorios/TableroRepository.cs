@@ -120,7 +120,7 @@ public class TableroRepository : ITableroRepository
             command.Parameters.Add(new SQLiteParameter("idTablero", idTablero));
             command.Parameters.Add(new SQLiteParameter("@nombre", tableroModificar.Nombre));
             command.Parameters.Add(new SQLiteParameter("@descripcion", tableroModificar.Descripcion));
-            command.Parameters.Add(new SQLiteParameter("@id_usuario_propietario", tableroModificar.IdUsuarioPropietario));
+            command.Parameters.Add(new SQLiteParameter("@idUsuario", tableroModificar.IdUsuarioPropietario));
 
             command.ExecuteNonQuery();
             connection.Close();
