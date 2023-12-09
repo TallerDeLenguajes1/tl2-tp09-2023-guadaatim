@@ -25,7 +25,7 @@ public class UsuarioController : ControllerBase
     [HttpGet("GetAllUsuarios")]
     public ActionResult<List<Usuario>> GetAllUsuarios()
     {
-        List<Usuario> usuarios = usuarioRepository.GetAllUsuario();
+        List<Usuario> usuarios = usuarioRepository.GetAllUsuarios();
 
         if(usuarios != null)
         {

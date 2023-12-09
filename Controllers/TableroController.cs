@@ -28,7 +28,7 @@ public class TableroController : ControllerBase
     [HttpGet("GetAllTableros")]
     public ActionResult<List<Tablero>> GetAllTableros()
     {
-        List<Tablero> tableros = tableroRepository.GetAllTablero();
+        List<Tablero> tableros = tableroRepository.GetAllTableros();
         
         if (tableros != null)
         {
